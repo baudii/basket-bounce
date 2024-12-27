@@ -16,6 +16,8 @@ namespace BasketBounce.Gameplay.Mechanics
 		int touches;
 		bool isPressed;
 
+		bool isDisabled;
+
 		WireBender[] wires;
 
 
@@ -23,6 +25,7 @@ namespace BasketBounce.Gameplay.Mechanics
 		{
 			touches = 0;
 			isPressed = false;
+			isDisabled = false;
 		}
 
 		private void OnValidate()
@@ -38,12 +41,16 @@ namespace BasketBounce.Gameplay.Mechanics
 
 		private void UpdateState()
 		{
+
 			if (touches > 0 && !isPressed)
 			{
-				Toggle();
+				if (!isDisabled)
+					Toggle();
+
 				if (sr != null)
 					sr.sprite = pressed;
 				isPressed = true;
+
 			}
 			else if (touches == 0 && isPressed)
 			{
@@ -70,5 +77,7 @@ namespace BasketBounce.Gameplay.Mechanics
 				UpdateState();
 			}
 		}
+
+		public void SetDisabled(bool disabled) => isDisabled = disabled;
 	}
 }
