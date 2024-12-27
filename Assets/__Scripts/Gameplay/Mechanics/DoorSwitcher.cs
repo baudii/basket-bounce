@@ -43,7 +43,7 @@ namespace BasketBounce.Gameplay.Mechanics
 		{
 			if (disableWire ||
 				!doorMovements.Any(movement => movement.MoveActions
-								.Any(action => action.Type == DoorMoveAction.ActionType.Position)))
+							  .Any(action => action.Type == DoorMoveAction.ActionType.Position)))
 				return;
 
 			if (_wirePrefab == null)
@@ -57,6 +57,7 @@ namespace BasketBounce.Gameplay.Mechanics
 			var wire = wireGo.GetComponent<WireBender>();
 			var currentPos = transform.position + wireLocalOffset;
 			wire.Init(currentPos);
+
 			int i = 1;
 			foreach (var movement in doorMovements)
 			{
