@@ -83,19 +83,12 @@ namespace BasketBounce.Gameplay.Mechanics
 			Gizmos.DrawIcon(position, "breakable_icon.png");
 		}
 #endif
-		const float blinkDuration = 1;
-
-		Color initialColor;
-		int currentHits;
-
-		bool broken = false;
-
-		Vector2 initialPos;
 
 		private void Awake()
 		{
 			initialColor = sr.color;
 			initialPos = transform.position;
+			isKinematicInitial = rb.isKinematic;
 		}
 
 		private async void Start()
@@ -107,13 +100,13 @@ namespace BasketBounce.Gameplay.Mechanics
 				textObj.transform.rotation = Quaternion.identity;
 				textObj.transform.SetParent(transform);
 				textObj.transform.localPosition = localOffsetTextPosition;
-				textObj.transform.position = GetOverridenPosition(transform.position);
+				textObj.transform.position = GetOverridenPosition(textObj.transform.position);
 				_textObj = textObj.GetComponent<BreakableCounter_WorldUI>();
 			}
 			UpdateBlinkColor();
 		}
 
-		private Vector3 GetOverridenPosition(Vector3 position)
+		#endregion
 		private async Task<GameObject> GetTextPrefabAsync()
 		{
 			if (_textPrefab == null)
@@ -125,17 +118,19 @@ namespace BasketBounce.Gameplay.Mechanics
 
 			return _textPrefab;
 		}
+
+		private Vector3 GetOverridenPosition(Vector3 fromPosition)
 		{
 			if (overrideTextPosition.x != 0)
-				position.x = overrideTextPosition.x;
+				fromPosition.x = overrideTextPosition.x;
 
 			if (overrideTextPosition.y != 0)
-				position.y = overrideTextPosition.y;
+				fromPosition.y = overrideTextPosition.y;
 
 			if (overrideTextPosition.z != 0)
-				position.z = overrideTextPosition.z;
-			
-			return position;
+				fromPosition.z = overrideTextPosition.z;
+
+			return fromPosition;
 		}
 
 		private void OnCollisionEnter2D(Collision2D collision)
@@ -188,6 +183,7 @@ namespace BasketBounce.Gameplay.Mechanics
 			rb.isKinematic = false;
 			rb.gravityScale = gravityScale;
 			coll.enabled = false;
+			
 		}
 
 		public void CompleteBreak()
@@ -200,7 +196,7 @@ namespace BasketBounce.Gameplay.Mechanics
 			StopAllCoroutines();
 			if (rb != null)
 			{
-				rb.isKinematic = true;
+				rb.isKinematic = isKinematicInitial;
 				rb.gravityScale = 0;
 				rb.velocity *= 0;
 				rb.angularVelocity *= 0;
