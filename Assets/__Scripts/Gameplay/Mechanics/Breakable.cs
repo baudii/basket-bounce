@@ -114,6 +114,17 @@ namespace BasketBounce.Gameplay.Mechanics
 		}
 
 		private Vector3 GetOverridenPosition(Vector3 position)
+		private async Task<GameObject> GetTextPrefabAsync()
+		{
+			if (_textPrefab == null)
+			{
+				var result = Addressables.LoadAssetAsync<GameObject>(key: "WT_Counter");
+				await result.Task;
+				_textPrefab = result.Result;
+			}
+
+			return _textPrefab;
+		}
 		{
 			if (overrideTextPosition.x != 0)
 				position.x = overrideTextPosition.x;
