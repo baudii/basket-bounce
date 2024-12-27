@@ -152,6 +152,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializeOnStart: 1
+  testLevel: 0
+  testLevelSet: 0
+  testOpenedLevel: 0
 --- !u!4 &1168511866
 Transform:
   m_ObjectHideFlags: 0

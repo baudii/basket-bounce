@@ -21,8 +21,6 @@ namespace BasketBounce.Gameplay.Mechanics
 
 		public void ResetState()
 		{
-			this.Log("Reseting state");
-
 			onResetState?.Invoke();
 		}
 	}

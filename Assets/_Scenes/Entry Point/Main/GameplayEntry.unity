@@ -200,15 +200,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 766244820111206179, guid: 6f7534f10661ad148bb0edc31b125e8c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5147743
-      objectReference: {fileID: 0}
-    - target: {fileID: 4730047137461108599, guid: 6f7534f10661ad148bb0edc31b125e8c, type: 3}
-      propertyPath: m_PathPosition
-      value: 0.9440003
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5024164621190854773, guid: 6f7534f10661ad148bb0edc31b125e8c, type: 3}
       propertyPath: m_Waypoints.Array.data[1].position.y
-      value: 2.001
+      value: 14.531
       objectReference: {fileID: 0}
     - target: {fileID: 5991462755021634462, guid: 6f7534f10661ad148bb0edc31b125e8c, type: 3}
       propertyPath: m_Name
@@ -332,6 +328,22 @@ PrefabInstance:
     - target: {fileID: 4643824765581368956, guid: 34eb22ddba145254e8daafbf73c41cdc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746264652873803829, guid: 34eb22ddba145254e8daafbf73c41cdc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870092093485379522, guid: 34eb22ddba145254e8daafbf73c41cdc, type: 3}
+      propertyPath: maxVelocityMagnitude
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5670279813487232979, guid: 34eb22ddba145254e8daafbf73c41cdc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712385262342542968, guid: 34eb22ddba145254e8daafbf73c41cdc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

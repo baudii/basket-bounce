@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e90fa81d79324b84fa265b08f466b2de
   m_SerializeEntries:
+  - m_GUID: 0bca3bc5233a5864a81583c4e18a9145
+    m_Address: AnimatedArrowObj
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1aba016c17fd17e46b539c9222aae180
     m_Address: GameSettingsSO
     m_ReadOnly: 0

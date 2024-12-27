@@ -2506,7 +2506,7 @@ MonoBehaviour:
   blinkColor: {r: 0.75686276, g: 0.3647059, b: 0.1254902, a: 1}
   overrideTextPosition: {x: 0, y: 0, z: 0}
   localOffsetTextPosition: {x: 0.2, y: -0.2, z: 0}
-  defaultValues: 1
+  defaultValues: 0
 --- !u!50 &8428674114840810576
 Rigidbody2D:
   serializedVersion: 4
@@ -7034,7 +7034,7 @@ MonoBehaviour:
   blinkColor: {r: 0.75686276, g: 0.3647059, b: 0.1254902, a: 1}
   overrideTextPosition: {x: 0, y: 0, z: 0}
   localOffsetTextPosition: {x: -0.2, y: -0.2, z: 0}
-  defaultValues: 1
+  defaultValues: 0
 --- !u!50 &4521190260565051073
 Rigidbody2D:
   serializedVersion: 4
