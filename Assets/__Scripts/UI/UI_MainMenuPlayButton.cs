@@ -3,38 +3,27 @@ using BasketBounce.Systems;
 using KK.Common;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BasketBounce.UI
 {
 	public class UI_MainMenuPlayButton : MonoBehaviour
 	{
-		int levelCached;
+		[SerializeField] Button button;
+		(int, int) levelCached;
 
-		public Action<int> OnStartGame;
-
-		private void Start()
+		public void CacheLevel(int levelSet, int level)
 		{
-			LoadLevelSet();
-		}
-
-		public void LoadLevelSet()
-		{
-			levelCached = PlayerPrefs.GetInt(LevelManager.GetLastLevelSetIdKey(), 0);
-			if (levelCached == 0)
-				gameObject.SetActive(false);
-		}
-
-		public void CacheLevel(int level)
-		{
-			levelCached = level;
-			if (!gameObject.activeSelf)
-				gameObject.SetActive(true);
+			levelCached = (levelSet, level);
+			if (!button.interactable)
+				button.interactable = true;
 		}
 
 		public void StartGame()
 		{
 			DIContainer.GetDependency(out GameManager gameManager);
-			gameManager.SubmitLevel(levelCached).SafeExectute();
+			(var levelSet, var level) = levelCached;
+			gameManager.SubmitLevel(levelSet, level).SafeExectute();
 		}
 	}
 }

@@ -24,7 +24,7 @@ namespace BasketBounce.UI
             if (dir == 0)
                 return;
 
-            if (currentChildNum + dir > curRect.childCount - ignoreChildren - 1 || currentChildNum + dir < 0)
+            if (currentChildNum + dir >= curRect.childCount - ignoreChildren || currentChildNum + dir < 0)
                 return;
 
             var currentChild = (RectTransform)transform.GetChild(currentChildNum);

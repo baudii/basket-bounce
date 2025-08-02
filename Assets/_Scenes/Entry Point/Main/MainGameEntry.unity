@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a2a00573ac410429b17567f96f02ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initializeOnStart: 1
+  initializeOnStart: 0
   testLevel: 0
   testLevelSet: 0
   testOpenedLevel: 0
