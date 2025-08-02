@@ -10,6 +10,7 @@ namespace BasketBounce.UI
 	{
 		[SerializeField] UI_LevelIcon levelIconPrefab;
 		[SerializeField] Transform gridParent;
+
 		List<UI_LevelIcon> levels;
 
 		int levelAmount;
@@ -17,15 +18,15 @@ namespace BasketBounce.UI
 
 		LevelManager levelManager;
 
-		public void Init()
+        public void Init()
 		{
 			DIContainer.GetDependency(out levelManager);
 			levelManager.OnLevelSetAvailable.AddListener(Setup);
 		}
 
-		public void Setup(LevelSet levelSet)
+		public void Setup(int levelCount)
 		{
-			levelAmount = levelSet.LevelCount;
+			levelAmount = levelCount;
 			levels = new List<UI_LevelIcon>();
 			for (int i = 0; i < levelAmount; i++)
 			{
@@ -51,18 +52,18 @@ namespace BasketBounce.UI
 		{
 			int currentLevel = levelManager.CurrentLevel;
 
-			var lastDiscoveredKey = LevelManager.GetLastDiscoveredLevelKey(levelManager.LevelSetId);
+            var lastDiscoveredKey = LevelManager.GetLastDiscoveredLevelKey(levelManager.LevelSetId);
 
-			int lastLevel = PlayerPrefs.GetInt(lastDiscoveredKey, 0);
+            int lastLevel = PlayerPrefs.GetInt(lastDiscoveredKey, 0);
 
-			for (int i = 0; i < levels.Count; i++)
-			{
-				var earnedStarsKey = LevelManager.GetEarnedStarsKey(i, levelManager.LevelSetId);
-				int stars = PlayerPrefs.GetInt(earnedStarsKey, 0);
+            for (int i = 0; i < levels.Count; i++)
+            {
+                var earnedStarsKey = LevelManager.GetEarnedStarsKey(i, levelManager.LevelSetId);
+                int stars = PlayerPrefs.GetInt(earnedStarsKey, 0);
 
-				levels[i].UpdateCell(stars, i, i <= lastLevel, currentLevel == i);
-			}
-		}
+                levels[i].UpdateCell(stars, i, i <= lastLevel, currentLevel == i);
+            }
+        }
 
 		public void Submit()
 		{

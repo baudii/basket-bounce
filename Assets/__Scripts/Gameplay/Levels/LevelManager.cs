@@ -23,7 +23,7 @@ namespace BasketBounce.Gameplay.Levels
 		[HideInInspector]
 		public UnityEvent<ScoreData> OnFinishedLevelEvent;
 		[HideInInspector]
-		public UnityEvent<LevelSet> OnLevelSetAvailable;
+		public UnityEvent<int> OnLevelSetAvailable;
 
 		#endregion
 
@@ -97,7 +97,7 @@ namespace BasketBounce.Gameplay.Levels
 				}
 				this.Log($"Found current level: {levelNum}");
 				currentLevelSet.InitChunk(levelNum, lastChunk);
-				OnLevelSetAvailable?.Invoke(currentLevelSet);
+				OnLevelSetAvailable?.Invoke(currentLevelSet.LevelCount);
 				await LoadLevelAsync(levelNum);
 			}
 #endif
@@ -122,7 +122,7 @@ namespace BasketBounce.Gameplay.Levels
 			var levelSetPrefab = levelSetPrefabs[levelSet];
 			var levelSetGo = Instantiate(levelSetPrefab, Vector3.zero, Quaternion.identity, transform);
 			currentLevelSet = levelSetGo.GetComponent<LevelSet>();
-			OnLevelSetAvailable?.Invoke(currentLevelSet);
+			OnLevelSetAvailable?.Invoke(currentLevelSet.LevelCount);
 
 			if (level == null)
 			{

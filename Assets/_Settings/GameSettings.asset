@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c79c9f752a904f498655ebd4f100204, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  autostartEnabled: 0
+  autostartEnabled: 1

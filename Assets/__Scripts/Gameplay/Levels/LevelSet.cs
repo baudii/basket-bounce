@@ -11,6 +11,7 @@ namespace BasketBounce.Gameplay.Levels
 		[SerializeField] int chunkSize;
 		[SerializeField] int levelSetId;
 		public int LevelSetId => levelSetId;
+		public List<LevelChunk> Chunks => chunks;
 
 		LevelChunk currentChunk;
 		int currentChunkIndex;

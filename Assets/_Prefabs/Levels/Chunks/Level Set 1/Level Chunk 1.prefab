@@ -66,6 +66,7 @@ MonoBehaviour:
   - {fileID: 2721551786182799145}
   - {fileID: 580669395815395852}
   validate: 0
+  disableAll: 0
 --- !u!1 &479999648567153753
 GameObject:
   m_ObjectHideFlags: 0

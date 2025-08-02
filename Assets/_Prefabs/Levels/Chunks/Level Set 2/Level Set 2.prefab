@@ -47,5 +47,6 @@ MonoBehaviour:
   chunks:
   - {fileID: 6576593262867819624, guid: eed3f9871eabb78408cbfddfa1befed2, type: 3}
   - {fileID: 6720029330800034196, guid: 529093529d0c29144b618cb3f49677d8, type: 3}
+  - {fileID: 5593357564947794029, guid: 736d4ffb8a0211d4aa7034f9f1b1c36b, type: 3}
   chunkSize: 10
   levelSetId: 1
