@@ -50,3 +50,4 @@ MonoBehaviour:
   - {fileID: 113431343753088314, guid: 74cfed1e33d6a4f42a234f9eb4059b9f, type: 3}
   chunkSize: 10
   levelSetId: 0
+  LevelSetName: Library

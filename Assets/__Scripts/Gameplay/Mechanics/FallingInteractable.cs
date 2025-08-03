@@ -1,6 +1,7 @@
 using BasketBounce.DOTweenComponents;
 using BasketBounce.Systems;
 using KK.Common;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -8,7 +9,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace BasketBounce.Gameplay
 {
 	[RequireComponent(typeof(Rigidbody2D))]
-	public class FallingInteractable : MonoBehaviour, IResetableItem
+	public class FallingInteractable : MonoBehaviour, IResetableItem, ILevelValidator
 	{
 		[SerializeField] Rigidbody2D rb;
 		[SerializeField] SimpleMoveTween simpleMoveTween;
@@ -30,6 +31,7 @@ namespace BasketBounce.Gameplay
 
 		private void Awake()
 		{
+			this.Log($"Awake in {transform.name}");
 			initialPosition = transform.position;
 			rb = GetComponent<Rigidbody2D>();
 			isDisabledInitial = isDisabled;
@@ -81,6 +83,7 @@ namespace BasketBounce.Gameplay
 
 		public void ResetState()
 		{
+			this.Log(transform.name);
 			transform.position = initialPosition;
 			rb.isKinematic = false;
 			isFalling = false;
@@ -99,31 +102,38 @@ namespace BasketBounce.Gameplay
 		{
 			if (validate)
 			{
-				rb = GetComponent<Rigidbody2D>();
-				rb.freezeRotation = true;
-				rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-				rb.gravityScale = 6.0f;
-				rb.mass = 5;
-				if (simpleMoveTween == null)
-				{
-					var asyncOp = Addressables.LoadAssetAsync<GameObject>("AnimatedArrowObj");
-					asyncOp.Completed += HandleAsyncOp;
-				}
-				validate = false;
-			}
+				Validate();
+            }
 		}
 
 		private void HandleAsyncOp(AsyncOperationHandle<GameObject> prefab)
 		{
 			this.Log("Object loaded successfully");
-			var go = Instantiate(prefab.Result, transform);
-			simpleMoveTween = go.GetComponent<SimpleMoveTween>();
+			GameObject go = Instantiate(prefab.Result, transform);
+
+            simpleMoveTween = go.GetComponent<SimpleMoveTween>();
 			if (simpleMoveTween == null)
 			{
 				this.LogError("Something went wrong when creating SimpleMoveTween gameobject");
 			}
 		}
+
+        public void Validate()
+        {
+			this.Log($"Validating {transform.name}");
+            rb = GetComponent<Rigidbody2D>();
+            rb.freezeRotation = true;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            rb.gravityScale = 6.0f;
+            rb.mass = 5;
+            if (simpleMoveTween == null)
+            {
+                var asyncOp = Addressables.LoadAssetAsync<GameObject>("AnimatedArrowObj");
+                asyncOp.Completed += HandleAsyncOp;
+            }
+            validate = false;
+        }
 #endif
 
-	}
+    }
 }

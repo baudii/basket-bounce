@@ -50,3 +50,4 @@ MonoBehaviour:
   - {fileID: 5593357564947794029, guid: 736d4ffb8a0211d4aa7034f9f1b1c36b, type: 3}
   chunkSize: 10
   levelSetId: 1
+  LevelSetName: Maze

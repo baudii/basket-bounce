@@ -14,7 +14,7 @@ namespace BasketBounce.UI
 		List<UI_LevelIcon> levels;
 
 		int levelAmount;
-		public int MaxTotalStars => levelAmount * 3;
+		public int MaxTotalStars;
 
 		LevelManager levelManager;
 
@@ -24,9 +24,16 @@ namespace BasketBounce.UI
 			levelManager.OnLevelSetAvailable.AddListener(Setup);
 		}
 
-		public void Setup(int levelCount)
+		public void Setup(LevelSet levelSet)
 		{
-			levelAmount = levelCount;
+			if (levels != null && levels.Count > 0)
+			{
+				foreach (var level in levels)
+				{
+					Destroy(level.gameObject);
+				}
+			}
+			levelAmount = levelSet.LevelCount;
 			levels = new List<UI_LevelIcon>();
 			for (int i = 0; i < levelAmount; i++)
 			{
@@ -39,11 +46,15 @@ namespace BasketBounce.UI
 		{
 			int totalStars = 0;
 
-			for (int i = 0; i < levels.Count; i++)
+			for (int levelSetIdx = 0; levelSetIdx < levelManager.levelSetPrefabs.Count; levelSetIdx++)
 			{
-				var key = LevelManager.GetEarnedStarsKey(i, levelManager.LevelSetId);
-				totalStars += PlayerPrefs.GetInt(key, 0);
-			}
+                for (int i = 0; i < levelManager.levelSetPrefabs[levelSetIdx].GetComponent<LevelSet>().LevelCount; i++)
+                {
+                    var key = LevelManager.GetEarnedStarsKey(i, levelSetIdx);
+                    totalStars += PlayerPrefs.GetInt(key, 0);
+					MaxTotalStars += 3;
+                }
+            }
 
 			return totalStars;
 		}

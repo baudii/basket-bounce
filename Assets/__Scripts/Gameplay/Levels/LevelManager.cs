@@ -17,13 +17,13 @@ namespace BasketBounce.Gameplay.Levels
 		[HideInInspector]
 		public UnityEvent<LevelData> OnLevelSetupEvent;
 		[HideInInspector]
-		public UnityEvent<LevelData> OnLevelIsLoadedEvent;		
+		public UnityEvent<LevelData> OnLevelIsLoadedEvent;
 		[HideInInspector]
 		public UnityEvent OnFinishedGameEvent;
 		[HideInInspector]
 		public UnityEvent<ScoreData> OnFinishedLevelEvent;
 		[HideInInspector]
-		public UnityEvent<int> OnLevelSetAvailable;
+		public UnityEvent<LevelSet> OnLevelSetAvailable;
 
 		#endregion
 
@@ -35,7 +35,8 @@ namespace BasketBounce.Gameplay.Levels
 
 		public int LevelSetId => currentLevelSet.LevelSetId;
 
-		IList<GameObject> levelSetPrefabs;
+		[HideInInspector]
+		public IList<GameObject> levelSetPrefabs;
 
 		public async Task Init(GameManager gameManager)
 		{
@@ -43,65 +44,7 @@ namespace BasketBounce.Gameplay.Levels
 			var op = Addressables.LoadAssetsAsync<GameObject>("LevelSets", null);
 			await op.Task;
 			levelSetPrefabs = op.Result;
-
-#if UNITY_EDITOR
-			var lvl = gameManager.GetLevel();
-			this.Log("get level = ", lvl);
-			if (lvl == -1)
-			{
-				LevelSet lastLevelSet = null;
-				foreach (Transform child in transform)
-				{
-					if (child.gameObject.activeSelf && child.TryGetComponent(out LevelSet levelSet))
-					{
-						if (lastLevelSet != null)
-							lastLevelSet.gameObject.SetActive(false);
-
-						lastLevelSet = levelSet;
-					}
-				}
-				currentLevelSet = lastLevelSet;
-
-				this.Log($"Found current level set: {currentLevelSet}");
-
-				LevelChunk lastChunk = null;
-
-				foreach (Transform child in lastLevelSet.transform)
-				{
-					if (child.gameObject.activeSelf && child.TryGetComponent(out LevelChunk chunk))
-					{
-						if (lastChunk != null)
-							lastChunk.gameObject.SetActive(false);
-
-						lastChunk = chunk;
-					}
-				}
-				this.Log($"Found current chunk: {lastChunk}");
-
-				int levelNum = 0;
-				int i = 0;
-
-				LevelData lastLevel = null;
-
-				foreach (Transform child in lastChunk.transform)
-				{
-					if (child.gameObject.activeSelf && child.TryGetComponent(out LevelData levelData))
-					{
-						if (lastLevel != null)
-							lastLevel.gameObject.SetActive(false);
-
-						lastLevel = levelData;
-						levelNum = i;
-					}
-					i++;
-				}
-				this.Log($"Found current level: {levelNum}");
-				currentLevelSet.InitChunk(levelNum, lastChunk);
-				OnLevelSetAvailable?.Invoke(currentLevelSet.LevelCount);
-				await LoadLevelAsync(levelNum);
-			}
-#endif
-		}
+        }
 
 		void OnDestroy()
 		{
@@ -116,13 +59,13 @@ namespace BasketBounce.Gameplay.Levels
 			if (levelSetPrefabs == null)
 				throw new ArgumentNullException(nameof(levelSetPrefabs), $"Level set prefabs collections is null. It should be initialized.");
 
-			if (levelSet < 0 || levelSet >= levelSetPrefabs.Count - 1)
+			if (levelSet < 0 || levelSet >= levelSetPrefabs.Count)
 				throw new ArgumentOutOfRangeException(nameof(levelSet), $"Provided levelSet={levelSet} is invalid. Should be at least between [0, {levelSetPrefabs.Count - 1}] inclusive");
 			
 			var levelSetPrefab = levelSetPrefabs[levelSet];
 			var levelSetGo = Instantiate(levelSetPrefab, Vector3.zero, Quaternion.identity, transform);
 			currentLevelSet = levelSetGo.GetComponent<LevelSet>();
-			OnLevelSetAvailable?.Invoke(currentLevelSet.LevelCount);
+			OnLevelSetAvailable?.Invoke(currentLevelSet);
 
 			if (level == null)
 			{
@@ -191,13 +134,21 @@ namespace BasketBounce.Gameplay.Levels
 		public async Task NextLevel()
 		{
 			this.Log("Last level index:", currentLevelSet.LevelCount - 1, "Current level index:", CurrentLevel);
-			if (CurrentLevel == currentLevelSet.LevelCount - 1)
+			if (CurrentLevel >= currentLevelSet.LevelCount - 1)
 			{
-				OnFinishedGameEvent?.Invoke();
-				await ActivateLevelSet(LevelSetId + 1, 0);
-				return;
+				if (LevelSetId + 1 >= levelSetPrefabs.Count)
+				{
+                    OnFinishedGameEvent?.Invoke();
+                }
+				else
+				{
+					await ActivateLevelSet(LevelSetId + 1, 0);
+				}
 			}
-			await LoadLevelAsync(CurrentLevel + 1);
+			else
+			{
+				await LoadLevelAsync(CurrentLevel + 1);
+			}
 		}
 
 		public async Task LoadLevelAsync(int level)

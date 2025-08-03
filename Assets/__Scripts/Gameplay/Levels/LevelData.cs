@@ -102,9 +102,10 @@ namespace BasketBounce.Gameplay.Levels
 		{
 			transform.ForEachDescendant(child =>
 			{
-				if (child.TryGetComponent(out ILevelValidator levelValidator))
+				var validators = child.GetComponents<ILevelValidator>();
+				foreach (var validator in validators)
 				{
-					levelValidator.Validate();
+                    validator.Validate();
 				}
 			});
 		}

@@ -10,6 +10,7 @@ namespace BasketBounce.Gameplay.Levels
 		[SerializeField] List<LevelChunk> chunks;
 		[SerializeField] int chunkSize;
 		[SerializeField] int levelSetId;
+		public string LevelSetName;
 		public int LevelSetId => levelSetId;
 		public List<LevelChunk> Chunks => chunks;
 
@@ -35,9 +36,6 @@ namespace BasketBounce.Gameplay.Levels
 		public void InitChunk(int level, LevelChunk existingChunk = null)
 		{
 			this.Log("Init with level", level);
-			foreach (var chunk in chunks)
-				chunk.ValidateChunk();
-
 			currentChunkIndex = level / chunkSize;
 
 			if (existingChunk == null)

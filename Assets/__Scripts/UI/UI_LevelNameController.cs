@@ -15,6 +15,7 @@ namespace BasketBounce.UI
 
 		[Header("Level text animation")]
 		[SerializeField] RectTransform textRect;
+		[SerializeField] TextMeshProUGUI levelSetTextField;
 		[SerializeField] TextMeshProUGUI levelTextField;
 		[SerializeField] TextMeshProUGUI headerTextField;
 		[SerializeField] float textAnimDuration;
@@ -23,14 +24,15 @@ namespace BasketBounce.UI
 		// float initialTextXPos; - old
 
 		GestureDetector gestureDetector;
-
+		bool isShowingLevelSetName;
 		public void Init()
 		{
 			// initialTextXPos = textRect.localPosition.x; - old
 			DIContainer.GetDependency(out gestureDetector);
 			levelTextField.DOFade(0, 0);
 			headerTextField.DOFade(0, 0);
-			initialAlpha = target.color.a;
+			levelSetTextField.DOFade(0, 0);
+            initialAlpha = target.color.a;
 			gestureDetector.OnDragStart += SlowStop;
 		}
 
@@ -42,15 +44,29 @@ namespace BasketBounce.UI
 			}
 		}
 
-		public void StartAnimation(string header, int level)
+		public void ShowLevelSetName(string name)
+		{
+			isShowingLevelSetName = true;
+			levelSetTextField.text = name;
+        }
+
+        public void StartAnimation(string header, int level)
 		{
 			levelTextField.text = "Level " + level.ToString();
 			headerTextField.text = header;
 
 			// Appear
 			// textRect.DOLocalMoveX(0, duration).SetUpdate(true); Previous animation (text was moving from right)
-			levelTextField.DOFade(1, textAnimDuration).SetUpdate(true);
-			headerTextField.DOFade(1, textAnimDuration).SetDelay(delayBetweenAppear).SetUpdate(true);
+			int mpl = 0;
+			if (isShowingLevelSetName)
+			{
+                levelSetTextField.DOFade(1, textAnimDuration).SetUpdate(true);
+				mpl = 1;
+                isShowingLevelSetName = false;
+                levelSetTextField.DOFade(0, duration).SetDelay(delay - delayBetweenAppear + textAnimDuration).SetUpdate(true);
+            }
+			levelTextField.DOFade(1, textAnimDuration).SetDelay(mpl * delayBetweenAppear).SetUpdate(true);
+			headerTextField.DOFade(1, textAnimDuration).SetDelay(delayBetweenAppear + mpl * delayBetweenAppear).SetUpdate(true);
 			target.DOFade(targetAlpha, duration).SetUpdate(true);
 
 			// Dissapear
@@ -58,7 +74,8 @@ namespace BasketBounce.UI
 			levelTextField.DOFade(0, duration).SetDelay(delay - delayBetweenAppear + textAnimDuration).SetUpdate(true);
 			headerTextField.DOFade(0, duration).SetDelay(delay - delayBetweenAppear + textAnimDuration).SetUpdate(true);
 
-			target.DOFade(initialAlpha, duration)
+
+            target.DOFade(initialAlpha, duration)
 				.SetDelay(delay + duration)
 				.SetUpdate(true)
 				.OnComplete(() => gameObject.SetActive(false));

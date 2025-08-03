@@ -2,6 +2,7 @@ using DG.Tweening.Core;
 using KK.Common;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace BasketBounce.Gameplay.Levels
@@ -19,19 +20,24 @@ namespace BasketBounce.Gameplay.Levels
 		[SerializeField] bool disableAll;
 		private void OnValidate()
 		{
-			var name = transform.name;
-
 			if (validate)
-			{
-				int.TryParse(name.Split(' ').Last(), out int index);
+            {
+				try
+				{
 
-				levelChunkIndex = index - 1;
-				ValidateChunk(disableAll);
-				validate = false;
+                    var name = transform.name;
+                    int.TryParse(name.Split(' ').Last(), out int index);
+
+                    levelChunkIndex = index - 1;
+                    ValidateChunk(disableAll);
+                }
+				finally
+				{
+                    validate = false;
+                }
 			}
 		}
 
-#endif
 
 		public void ValidateChunk(bool toDisable = true)
 		{
@@ -44,18 +50,28 @@ namespace BasketBounce.Gameplay.Levels
 				{
 					levelData.gameObject.name = "Level " + i;
 					levels.Add(levelData);
-					if (levelData.gameObject.activeSelf)
-					{
-						levelData.ValidateLevel();
-						if (toDisable)
-							levelData.gameObject.SetActive(false);
-					}
-					i++;
+                    levelData.ValidateLevel();
+                    if (toDisable)
+                        levelData.gameObject.SetActive(false);
+                    i++;
 				}
 			}
-		}
 
-		public LevelData GetLevel(int level)
+            if (PrefabUtility.IsPartOfPrefabInstance(gameObject))
+            {
+                this.Log($"Apply changes to prefab instance: {transform.name}");
+                PrefabUtility.ApplyPrefabInstance(gameObject, InteractionMode.UserAction);
+            }
+            else if (PrefabUtility.IsPartOfPrefabAsset(gameObject))
+            {
+                this.Log($"Directly editing prefab asset: {transform.name}");
+                EditorUtility.SetDirty(gameObject); // Marks prefab as dirty
+                                                    // No need to ApplyPrefabInstance here — changes are saved when user presses "Save" in prefab mode
+            }
+        }
+
+#endif
+        public LevelData GetLevel(int level)
 		{
 			// 0 < level < chunkSize
 

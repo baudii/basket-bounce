@@ -54,7 +54,6 @@ namespace BasketBounce.UI
 				starsImg.sprite = star2;
 			else if (stars == 3)
 				starsImg.sprite = star3;
-
 		}
 
 		public void OnSelect(BaseEventData eventData)
@@ -82,5 +81,11 @@ namespace BasketBounce.UI
 				}
 			}, 1);
 		}
+
+		public void Deselect()
+		{
+			SelectedLevel = -1;
+            bodyImg.sprite = unlockedSprite;
+        }
 	}
 }

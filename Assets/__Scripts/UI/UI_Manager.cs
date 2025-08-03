@@ -73,7 +73,8 @@ namespace BasketBounce.UI
 
 			levelManager.OnLevelSetupEvent.AddListener(OnLevelSetup);
 			levelManager.OnLevelIsLoadedEvent.AddListener(OnLevelIsLoaded);
-			levelManager.OnFinishedGameEvent.AddListener(OnFinishedGame);
+            levelManager.OnLevelSetAvailable.AddListener(OnLevelSetAvailable);
+            levelManager.OnFinishedGameEvent.AddListener(OnFinishedGame);
 			levelManager.OnFinishedLevelEvent.AddListener(ShowLevelCompleteScreen);
 
 			ball.OnBallStartStretch += HideOverview;
@@ -229,6 +230,11 @@ namespace BasketBounce.UI
 			levelNameMainUI.StartAnimation(header, level);
 		}
 
+		void OnLevelSetAvailable(LevelSet levelSet)
+		{
+			levelNameMainUI.ShowLevelSetName(levelSet.LevelSetName);
+        }
+
 		public void ShowStuckScreen()
 		{
 			pauseScreen.InitStuck();
@@ -270,6 +276,7 @@ namespace BasketBounce.UI
 
 		void OnFinishedGame()
 		{
+			this.Log("Game finished");
 			SetState(MenuState.GameFinished);
 		}
 
