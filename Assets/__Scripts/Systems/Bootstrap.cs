@@ -2,6 +2,7 @@ using KK.Common;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
 
 
 namespace BasketBounce.Systems
@@ -24,9 +25,11 @@ namespace BasketBounce.Systems
 			var operation = Addressables.LoadAssetAsync<GameSettings>("GameSettingsSO");
 			await operation.Task;
 			var gameSettings = operation.Result;
+			gameSettings.Init();
 
 			if (gameSettings.AutoStartEnabled)
 			{
+				await SceneManager.LoadSceneAsync(0).AsTask();
 				var menuEntry = new GameObject().AddComponent<MainMenuEntry>();
 				await menuEntry.Enter();
 			}

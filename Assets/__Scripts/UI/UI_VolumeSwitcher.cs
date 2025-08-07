@@ -16,10 +16,22 @@ namespace BasketBounce.UI
 
         string fxKey = "fx-vol-cached";
         string musicKey = "music-vol-cached";
-        private void Start()
+        private void Awake()
         {
             volumeSwitchButton = GetComponent<Image>();
             volumeOnSprite = volumeSwitchButton.sprite;
+        }
+
+        public void OnValueChanged(float value)
+        {
+            if (value > slider.minValue)
+            {
+                volumeSwitchButton.sprite = volumeOnSprite;
+            }
+            else
+            {
+                volumeSwitchButton.sprite = volumeOffSprite;
+            }
         }
 
         public override void Activation()
@@ -27,7 +39,7 @@ namespace BasketBounce.UI
             if (IsActivated)
             {
                 slider.interactable = false;
-                volumeSwitchButton.sprite = volumeOffSprite;
+                OnValueChanged(slider.value);
                 if (fx)
                 {
                     PlayerPrefs.SetFloat(fxKey, slider.value);
@@ -38,20 +50,20 @@ namespace BasketBounce.UI
                     PlayerPrefs.SetFloat(musicKey, slider.value);
                     gameSettings.MusicVolume = 0;
                 }
-                slider.value = 0;
+                slider.value = slider.minValue;
             }
             else
             {
                 slider.interactable = true;
-                volumeSwitchButton.sprite = volumeOnSprite;
+                OnValueChanged(slider.value);
                 if (fx)
                 {
-                    slider.value = PlayerPrefs.GetFloat(fxKey, 0.5f);
+                    slider.value = PlayerPrefs.GetFloat(fxKey, 1);
                     gameSettings.FxVolume = slider.value;
                 }
                 else
                 {
-                    slider.value = PlayerPrefs.GetFloat(musicKey, 0.5f);
+                    slider.value = PlayerPrefs.GetFloat(musicKey, 1);
                     gameSettings.MusicVolume = slider.value;
                 }
             }

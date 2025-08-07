@@ -7,20 +7,35 @@ namespace BasketBounce.Systems
     public class GameSettings : ScriptableObject
     {
 		[SerializeField] bool autostartEnabled;
-        [SerializeField] AudioMixer audioMixer;
+        [SerializeField] AudioMixerSettingsSO audioMixerSettings;
 
-        const string musicKey = "Music_sound";
-        const string fxKey = "FX_sound";
-        bool isLoadedSound;
-        public float MusicVolume { get; set; }
-        public float FxVolume { get; set; }
+        const string musicKey = "Music-key";
+        const string fxKey = "SFX-key";
+        private float musicVol;
+        private float fxVol;
+        public float MusicVolume
+        { 
+            get => musicVol; 
+            set
+            {
+                audioMixerSettings.SetConvertFrom01(musicKey, value);
+                musicVol = value;
+            } 
+        }
+        public float FxVolume
+        {
+            get => fxVol;
+            set
+            {
+                audioMixerSettings.SetConvertFrom01(fxKey, value);
+                fxVol = value;
+            }
+        }
+
         public bool AutoStartEnabled => autostartEnabled;
 
         public void Init()
         {
-            if (isLoadedSound)
-                return;
-
             MusicVolume = PlayerPrefs.GetFloat(musicKey);
             FxVolume = PlayerPrefs.GetFloat(fxKey);
         }
