@@ -41,12 +41,12 @@ namespace BasketBounce.UI
 				initialAlphas[i] = maskableGraphics[i].color.a;
 			}
 
-			levelManager.OnLevelSetupEvent.AddListener(SetActive);
+			levelManager.OnLevelIsLoadedEvent.AddListener(SetActive);
 		}
 
 		private void OnDestroy()
 		{
-			levelManager.OnLevelSetupEvent.RemoveListener(SetActive);
+			levelManager.OnLevelIsLoadedEvent.RemoveListener(SetActive);
 		}
 
 		private void SetActive(LevelData levelData)

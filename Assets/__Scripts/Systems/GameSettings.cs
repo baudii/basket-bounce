@@ -36,8 +36,8 @@ namespace BasketBounce.Systems
 
         public void Init()
         {
-            MusicVolume = PlayerPrefs.GetFloat(musicKey);
-            FxVolume = PlayerPrefs.GetFloat(fxKey);
+            MusicVolume = PlayerPrefs.GetFloat(musicKey, 1);
+            FxVolume = PlayerPrefs.GetFloat(fxKey, 1);
         }
 
         public void SaveVolume()

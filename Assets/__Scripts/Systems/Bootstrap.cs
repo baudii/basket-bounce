@@ -29,7 +29,7 @@ namespace BasketBounce.Systems
 
 			if (gameSettings.AutoStartEnabled)
 			{
-				await SceneManager.LoadSceneAsync(0).AsTask();
+				await SceneManager.LoadSceneAsync(SceneNames.BOOT).AsTask();
 				var menuEntry = new GameObject().AddComponent<MainMenuEntry>();
 				await menuEntry.Enter();
 			}

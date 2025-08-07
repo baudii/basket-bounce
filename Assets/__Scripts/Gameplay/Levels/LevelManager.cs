@@ -13,9 +13,9 @@ namespace BasketBounce.Gameplay.Levels
 {
 	public class LevelManager : MonoBehaviour
 	{
-		#region Unity Events
+        #region Unity Events
 
-		[HideInInspector]
+        [HideInInspector]
 		public UnityEvent<LevelData> OnLevelSetupEvent;
 		[HideInInspector]
 		public UnityEvent<LevelData> OnLevelIsLoadedEvent;

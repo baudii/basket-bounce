@@ -15,6 +15,7 @@ namespace BasketBounce.Gameplay
 		[SerializeField] SimpleMoveTween simpleMoveTween;
 		[SerializeField] bool isDisabled;
 		[SerializeField] int blocksUnder;
+		[SerializeField] float minFallTime = 0.5f;
 		Vector3 initialPosition;
 
 
@@ -25,7 +26,6 @@ namespace BasketBounce.Gameplay
 		
 		float startTime;
 		float? fallenTime;
-		float minFallTime = 0.5f;
 
 		int blocksUnderBroken;
 

@@ -1023,6 +1023,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 764965651270011240}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!1 &6408651776880965541
 GameObject:
@@ -2578,6 +2579,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 1675053622918507624}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!1001 &670358699071971955
 PrefabInstance:
@@ -2780,6 +2782,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 5183153060361141904}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!1001 &787347288373048583
 PrefabInstance:
@@ -3108,6 +3111,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 7907297978833198729}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!1001 &985497990772508339
 PrefabInstance:
@@ -6817,6 +6821,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 8968479096475651826}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!1001 &3470445607512054836
 PrefabInstance:
@@ -13915,6 +13920,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 7887150283597038662}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!4 &4606671371679522794 stripped
 Transform:

@@ -259,6 +259,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 4008330210775315114}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!1 &1435192302184658376
 GameObject:
@@ -1285,6 +1286,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 404136112443919589}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!1 &7056251922679048114
 GameObject:
@@ -3206,6 +3208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 5968788730539925090}
+  srs: []
   coll: {fileID: 9192590325564773139}
   rb: {fileID: 1230598410695451239}
   gfx_shadow: {fileID: 3151883701380151645}
@@ -4003,6 +4006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 2531434963355327697}
+  srs: []
   coll: {fileID: 6295451027924399832}
   rb: {fileID: 8033887805596467947}
   gfx_shadow: {fileID: 6505923074506423278}
@@ -4872,6 +4876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3189541860980002066}
+  srs: []
   coll: {fileID: 6358834843453941531}
   rb: {fileID: 2954461012803749279}
   gfx_shadow: {fileID: 6137103729167903277}
@@ -4928,6 +4933,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 1614730771059996848}
   isDisabled: 1
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!212 &3189541860980002066 stripped
 SpriteRenderer:
@@ -5309,6 +5315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3376041317203141134}
+  srs: []
   coll: {fileID: 6532051546378471431}
   rb: {fileID: 7297115559251289980}
   gfx_shadow: {fileID: 6319328250394559793}
@@ -5522,6 +5529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 2993401748085591035}
+  srs: []
   coll: {fileID: 6770646311725015538}
   rb: {fileID: 2819343811761015305}
   gfx_shadow: {fileID: 5828338758811413700}
@@ -5725,6 +5733,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 6085816206264876033}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!4 &1830470450933416274 stripped
 Transform:
@@ -6611,6 +6620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 1479342476143707733}
+  srs: []
   coll: {fileID: 6988240621495397468}
   rb: {fileID: 23814318588522821}
   gfx_shadow: {fileID: 7921680132107264362}
@@ -7738,6 +7748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8391318543153049841}
+  srs: []
   coll: {fileID: 6427817862347226496}
   rb: {fileID: 2036683793513878131}
   gfx_shadow: {fileID: 944396919419803598}
@@ -8420,6 +8431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 2195881160797536541}
+  srs: []
   coll: {fileID: 7639740753573194516}
   rb: {fileID: 7641220034767267909}
   gfx_shadow: {fileID: 7426873902589797922}
@@ -9484,6 +9496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 14980552450120909}
+  srs: []
   coll: {fileID: 8379405940861269700}
   rb: {fileID: 421253258544539039}
   gfx_shadow: {fileID: 8745392912023469042}
@@ -9662,6 +9675,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 5777937363091892459}
   isDisabled: 1
   blocksUnder: 4
+  minFallTime: 0.5
   validate: 0
 --- !u!4 &3523269564065889007 stripped
 Transform:
@@ -9774,6 +9788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 270550552053997232}
+  srs: []
   coll: {fileID: 8628239095198889145}
   rb: {fileID: 8565283125728560513}
   gfx_shadow: {fileID: 8838851329439988111}
@@ -10079,6 +10094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 940534812163419480}
+  srs: []
   coll: {fileID: 8751033492724434769}
   rb: {fileID: 5957428119322862188}
   gfx_shadow: {fileID: 8387298252622858855}
@@ -10266,6 +10282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 7216967043435680610}
+  srs: []
   coll: {fileID: 5287244389494267411}
   rb: {fileID: 38730516684766129}
   gfx_shadow: {fileID: 2111917156674040925}
@@ -10804,6 +10821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 7468317021011568350}
+  srs: []
   coll: {fileID: 5396169185282829231}
   rb: {fileID: 181574734004524534}
   gfx_shadow: {fileID: 2219169590436512225}
@@ -10931,6 +10949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 1036489862429145749}
+  srs: []
   coll: {fileID: 8799686212280422556}
   rb: {fileID: 9003533291138985396}
   gfx_shadow: {fileID: 8577811612249185706}
@@ -11327,6 +11346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8458751934630649480}
+  srs: []
   coll: {fileID: 80818384514561153}
   rb: {fileID: 757419287301759226}
   gfx_shadow: {fileID: 867890906739145143}
@@ -11534,6 +11554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8418667128804471127}
+  srs: []
   coll: {fileID: 47715313913207646}
   rb: {fileID: 848413011614123875}
   gfx_shadow: {fileID: 990164205658265192}
@@ -11578,6 +11599,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 361672669094542017}
   isDisabled: 1
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!212 &8418667128804471127 stripped
 SpriteRenderer:
@@ -11703,6 +11725,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 8454871935685047842}
   isDisabled: 1
   blocksUnder: 4
+  minFallTime: 0.5
   validate: 0
 --- !u!1001 &5057483371609228336
 PrefabInstance:
@@ -11809,6 +11832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 2687336861264346693}
+  srs: []
   coll: {fileID: 4314343661651411666}
   rb: {fileID: 5141020214875191487}
   gfx_shadow: {fileID: 6639307076378941818}
@@ -12355,6 +12379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 9187111387325779714}
+  srs: []
   coll: {fileID: 793676784926106891}
   rb: {fileID: 1239727011867825643}
   gfx_shadow: {fileID: 439089001048795197}
@@ -12698,6 +12723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8787842007033115945}
+  srs: []
   coll: {fileID: 975089018800152352}
   rb: {fileID: 4095037522397997182}
   gfx_shadow: {fileID: 44041495761801750}
@@ -13304,6 +13330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 1405525761796372601}
+  srs: []
   coll: {fileID: 4523496047889921288}
   rb: {fileID: 8685410171823342350}
   gfx_shadow: {fileID: 7703888769509547846}
@@ -13923,6 +13950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 7938136443650888295}
+  srs: []
   coll: {fileID: 1897551446252304494}
   rb: {fileID: 1942376358938858026}
   gfx_shadow: {fileID: 1675679044740347224}
@@ -13967,6 +13995,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 3632340819014521535}
   isDisabled: 1
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!212 &7938136443650888295 stripped
 SpriteRenderer:
@@ -14355,6 +14384,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 2839891191993859294}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!1001 &7353993396235569762
 PrefabInstance:
@@ -14456,6 +14486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 5599082261138248593}
+  srs: []
   coll: {fileID: 6986259693111008992}
   rb: {fileID: 1526040324929790211}
   gfx_shadow: {fileID: 3808699042932896942}
@@ -15007,6 +15038,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 4180218665626406928}
   isDisabled: 0
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!1001 &7607362073362105931
 PrefabInstance:
@@ -15253,6 +15285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 4647786681871364266}
+  srs: []
   coll: {fileID: 7910432931866164699}
   rb: {fileID: 4595950017467530059}
   gfx_shadow: {fileID: 4172753708084320149}
@@ -15585,6 +15618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 6391234437675783475}
+  srs: []
   coll: {fileID: 3228694105847103290}
   rb: {fileID: 4361003601836913015}
   gfx_shadow: {fileID: 2439510520778994188}
@@ -15759,6 +15793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 6404766409067962629}
+  srs: []
   coll: {fileID: 3215241278888921868}
   rb: {fileID: 3981708157166982824}
   gfx_shadow: {fileID: 2416908124992374330}
@@ -16007,6 +16042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8080221898661749992}
+  srs: []
   coll: {fileID: 6729915553919805849}
   rb: {fileID: 1590437801353464637}
   gfx_shadow: {fileID: 669469809198777303}
@@ -16870,6 +16906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 4670986264269197989}
+  srs: []
   coll: {fileID: 3796029498231617708}
   rb: {fileID: 3711846353707655109}
   gfx_shadow: {fileID: 4159766387529233818}
@@ -16914,6 +16951,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 5816647096691262163}
   isDisabled: 1
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!4 &6343938845430625749 stripped
 Transform:
@@ -17189,6 +17227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 4887967190848514118}
+  srs: []
   coll: {fileID: 4010760815564767823}
   rb: {fileID: 465819688481706649}
   gfx_shadow: {fileID: 4232632117046972281}
@@ -17233,6 +17272,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 1552530561568071283}
   isDisabled: 1
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!4 &6560921973046972214 stripped
 Transform:
@@ -17579,6 +17619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 5603752341908580578}
+  srs: []
   coll: {fileID: 4159108227628794603}
   rb: {fileID: 7378725584636008920}
   gfx_shadow: {fileID: 3795513244547665885}
@@ -18118,6 +18159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 5424956173197851226}
+  srs: []
   coll: {fileID: 4554767671245426771}
   rb: {fileID: 7111055347832235659}
   gfx_shadow: {fileID: 3612318848238329189}
@@ -18310,6 +18352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 5348152044480800508}
+  srs: []
   coll: {fileID: 4486968448555928821}
   rb: {fileID: 7540125443725796472}
   gfx_shadow: {fileID: 3697644195276259779}
@@ -18366,6 +18409,7 @@ MonoBehaviour:
   simpleMoveTween: {fileID: 6727762365086549700}
   isDisabled: 1
   blocksUnder: 0
+  minFallTime: 0.5
   validate: 0
 --- !u!4 &5972033089503854988 stripped
 Transform:
