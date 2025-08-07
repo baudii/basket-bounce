@@ -15,14 +15,18 @@ namespace BasketBounce.UI
         [SerializeField, Tooltip("Means that some children shouldn't interfere with the bound detection algorithm. They should be placed last.")] int ignoreChildren;
         int currentChildNum;
         RectTransform curRect;
+        float totalMovement;
         private void Start()
         {
             Time.timeScale = 1;
             curRect = (RectTransform)transform;
             currentChildNum = 0;
+            var firstChild = (RectTransform)transform.GetChild(0);
+            totalMovement = firstChild.sizeDelta.x;
         }
         public void Slide(int dir)
         {
+            curRect.DOComplete();
             dir = Utils.Signum(dir);
 
             this.Log($"CurChildNum {currentChildNum}, dir {dir}, ignore {ignoreChildren}");
@@ -35,7 +39,7 @@ namespace BasketBounce.UI
 
 
             var curChild = (RectTransform)transform.GetChild(currentChildNum);
-            var movement = curChild.sizeDelta.x * dir;
+            var movement = totalMovement * dir;
             curRect.DOAnchorPosX(curRect.anchoredPosition.x - movement, slideDuration);
 
             currentChildNum += dir;
@@ -43,7 +47,8 @@ namespace BasketBounce.UI
 
             ScrollRect scroll = curChild.GetComponent<ScrollRect>();
             scroll.StopMovement();
-            ((RectTransform)curChild.GetChild(0).GetChild(0)).DOAnchorPosY(0, slideDuration);
+            if (curChild.TryGetComponent(out UI_LevelSelectMainMenu _))
+                ((RectTransform)curChild.GetChild(0).GetChild(0)).DOAnchorPosY(0, slideDuration);
         }
     }
 }

@@ -5,6 +5,8 @@ using BasketBounce.Gameplay;
 using BasketBounce.Gameplay.Levels;
 using BasketBounce.Models;
 using KK.Common;
+using System;
+using System.Linq;
 
 
 #if UNITY_ANDROID || UNITY_IOS
@@ -13,7 +15,7 @@ using CandyCoded.HapticFeedback;
 
 namespace BasketBounce.UI
 {
-	public class UI_Manager : MonoBehaviour
+	public class UI_Manager : MonoBehaviour, IInitializable
 	{
 		public enum MenuState
 		{
@@ -63,9 +65,18 @@ namespace BasketBounce.UI
 
 		public void Init()
 		{
-			DIContainer.GetDependency(out gameManager);
-			DIContainer.GetDependency(out levelManager);
-			DIContainer.GetDependency(out ball);
+			try
+			{
+                DIContainer.GetDependency(out gameManager);
+                DIContainer.GetDependency(out levelManager);
+                DIContainer.GetDependency(out ball);
+            }
+			catch
+			{
+				DIContainer.Register(this);
+                InitializeChildren(shouldThrow: false);
+				return;
+			}
 
 			gameManager.OnInGameEnterEvent.AddListener(OnInGameEnter);
 			gameManager.OnInGameExitEvent.AddListener(OnInGameExit);
@@ -81,10 +92,33 @@ namespace BasketBounce.UI
 			ball.OnBallAbortStretch += ShowOverview;
 			ball.OnStuck += ShowStuckScreen;
 
+			InitializeChildren();
+        }
+
+		private void InitializeChildren(bool shouldThrow = true)
+		{
+			this.Log("Initializing children");
 			var initializables = GetComponentsInChildren<IInitializable>(true);
 
 			foreach (var component in initializables)
-				component.Init();
+			{
+				if (ReferenceEquals(component, this))
+				{
+					this.Log("Found self");
+					continue;
+				}
+
+				try
+				{
+					this.Log($"Initializing {component.GetType().Name}");
+					component?.Init();
+				}
+				catch (Exception ex)
+				{
+					if (shouldThrow) throw;
+					this.LogError(ex);
+				}
+			}
 		}
 
 		private void OnDestroy()

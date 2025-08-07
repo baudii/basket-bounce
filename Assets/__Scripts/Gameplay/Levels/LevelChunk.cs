@@ -56,21 +56,23 @@ namespace BasketBounce.Gameplay.Levels
                     i++;
 				}
 			}
-
-            if (PrefabUtility.IsPartOfPrefabInstance(gameObject))
-            {
-                this.Log($"Apply changes to prefab instance: {transform.name}");
-                PrefabUtility.ApplyPrefabInstance(gameObject, InteractionMode.UserAction);
-            }
-            else if (PrefabUtility.IsPartOfPrefabAsset(gameObject))
+			
+			if (PrefabUtility.IsPartOfPrefabAsset(gameObject))
             {
                 this.Log($"Directly editing prefab asset: {transform.name}");
-                EditorUtility.SetDirty(gameObject); // Marks prefab as dirty
-                                                    // No need to ApplyPrefabInstance here — changes are saved when user presses "Save" in prefab mode
+                EditorUtility.SetDirty(gameObject);
             }
         }
 
 #endif
+		public void Init()
+		{
+            foreach (var level in levels)
+            {
+                level.gameObject.SetActive(false);
+            }
+        }
+
         public LevelData GetLevel(int level)
 		{
 			// 0 < level < chunkSize

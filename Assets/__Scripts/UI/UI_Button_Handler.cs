@@ -5,6 +5,7 @@ using BasketBounce.Gameplay.Levels;
 using KK.Common;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using System;
 
 namespace BasketBounce.UI
 {
@@ -27,10 +28,16 @@ namespace BasketBounce.UI
 		}
 
 		public void Init()
-		{
-			DIContainer.GetDependency(out gameManager);
-			DIContainer.GetDependency(out levelManager);
-			DIContainer.GetDependency(out uiManager);
+        {
+            DIContainer.GetDependency(out gameManager);
+            DIContainer.GetDependency(out uiManager);
+            try
+			{
+				DIContainer.GetDependency(out levelManager);
+			}
+			catch
+			{
+			}
 		}
 
 		public void OnPointerDown(PointerEventData eventData)

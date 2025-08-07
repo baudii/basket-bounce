@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using KK.Common;
 namespace BasketBounce.UI
 {
-	public class UI_LevelIcon : MonoBehaviour, ISelectHandler, IDeselectHandler
+    public class UI_LevelIcon : MonoBehaviour, ISelectHandler, IDeselectHandler
 	{
 		[SerializeField] Button button;
 		[SerializeField] TextMeshProUGUI levelNumText;
@@ -87,5 +87,5 @@ namespace BasketBounce.UI
 			SelectedLevel = -1;
             bodyImg.sprite = unlockedSprite;
         }
-	}
+    }
 }

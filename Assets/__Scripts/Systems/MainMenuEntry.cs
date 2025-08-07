@@ -36,12 +36,20 @@ namespace BasketBounce.Systems
 		{
 			DIContainer.GetDependency(out gameManager);
 
-			await SceneManager.LoadSceneAsync(SceneNames.MAIN_MENU).AsTask(Cts.Token);
-
 			await gameManager.StartLoading(Cts.Token);
 			var scene = SceneManager.GetSceneByName(SceneNames.MAIN_MENU);
 			var root = scene.GetRootGameObjects();
-
+			foreach (var item in root)
+			{
+				if (item.TryGetComponent(out IInitializable initializable))
+				{
+					if (item.name == "Canvas")
+					{
+						initializable.Init();
+						break;
+					}
+				}
+			}
 
 			gameManager.OnSubmitLevel += SubmitLevelSet;
 

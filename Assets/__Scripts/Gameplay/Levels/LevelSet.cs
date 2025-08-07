@@ -33,6 +33,14 @@ namespace BasketBounce.Gameplay.Levels
 			}
 		}
 
+		public void Init()
+		{
+            foreach (var chunk in chunks)
+            {
+				chunk.Init();
+            }
+        }
+
 		public void InitChunk(int level, LevelChunk existingChunk = null)
 		{
 			this.Log("Init with level", level);

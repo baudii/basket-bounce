@@ -8,12 +8,12 @@ public class UIEntry : SceneEntryPoint
 {
 	[SerializeField] UI_Manager uiManager;
 
-
 	public override Task Setup()
 	{
+		this.Log($"Initializing ui UIEntry.");
 		Cts.Token.ThrowIfCancellationRequested();
 
-		DIContainer.Register(uiManager);
+        DIContainer.Register(uiManager);
 
 		uiManager.Init();
 

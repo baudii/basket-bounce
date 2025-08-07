@@ -151,10 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a2a00573ac410429b17567f96f02ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initializeOnStart: 0
+  gameSettings: {fileID: 11400000, guid: 1aba016c17fd17e46b539c9222aae180, type: 2}
   testLevel: 0
   testLevelSet: 0
-  testOpenedLevel: 0
+  testOpenedLevel: 1
 --- !u!4 &1168511866
 Transform:
   m_ObjectHideFlags: 0

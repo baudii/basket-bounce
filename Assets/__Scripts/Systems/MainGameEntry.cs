@@ -10,13 +10,13 @@ namespace BasketBounce.Systems
     public class MainGameEntry : SceneEntryPoint
 	{
 #if UNITY_EDITOR
-		[SerializeField] bool initializeOnStart;
+		[SerializeField] GameSettings gameSettings;
 		[SerializeField] int testLevel;
 		[SerializeField] int testLevelSet;
 		[SerializeField, Tooltip("Takes the last one in hierarchy")] bool testOpenedLevel;
 		private async void Start()
 		{
-			if (initializeOnStart)
+			if (!gameSettings.AutoStartEnabled)
 			{
 				DIContainer.GetDependency(out GameManager gameManager);
 				var level = testLevel;

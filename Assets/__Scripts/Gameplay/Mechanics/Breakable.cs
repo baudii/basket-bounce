@@ -9,6 +9,7 @@ using BasketBounce.Gameplay.Visuals;
 using BasketBounce.Systems;
 using KK.Common;
 using KK.Common.Gameplay;
+using System.Linq;
 
 
 namespace BasketBounce.Gameplay.Mechanics
@@ -17,6 +18,7 @@ namespace BasketBounce.Gameplay.Mechanics
 	{
 		[Header("Dependencies")]
 		[SerializeField] SpriteRenderer sr;
+		[SerializeField] SpriteRenderer[] srs;
 		[SerializeField] Collider2D coll;
 		[SerializeField] Rigidbody2D rb;
 		[SerializeField] GFX_Shadow gfx_shadow;
@@ -35,6 +37,7 @@ namespace BasketBounce.Gameplay.Mechanics
 		const float blinkDuration = 1;
 
 		Color initialColor;
+		Color[] initialColors;
 		int currentHits;
 
 		bool broken = false;
@@ -67,6 +70,8 @@ namespace BasketBounce.Gameplay.Mechanics
 				if (!TryGetComponent(out sr))
 					sr = gameObject.AddComponent<SpriteRenderer>();
 
+                srs = GetComponentsInChildren<SpriteRenderer>();
+
 				rb.isKinematic = true;
 				gravityScale = 6;
 
@@ -87,6 +92,11 @@ namespace BasketBounce.Gameplay.Mechanics
 		private void Awake()
 		{
 			initialColor = sr.color;
+			initialColors = new Color[srs.Length];
+			for (int i = 0; i < srs.Length; ++i)
+			{
+				initialColors[i] = srs[i].color;
+			}
 			initialPos = transform.position;
 			isKinematicInitial = rb.isKinematic;
 		}
@@ -148,13 +158,28 @@ namespace BasketBounce.Gameplay.Mechanics
 		{
 			_textObj?.SetText(Mathf.Max(hitsToFall - currentHits, 1).ToString());
 
-			sr.DOKill();
-			sr.color = blinkColor;
-			sr.DOColor(initialColor, blinkDuration * .5f).SetEase(Ease.Linear).OnComplete(() =>
+			if (srs.Length > 1)
 			{
-				sr.DOColor(blinkColor, blinkDuration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
-			});
+                foreach (var item in srs)
+                {
+					AnimateSpriteRenderer(item);
+                }
+            }
+			else
+			{
+				AnimateSpriteRenderer(sr);
+			}
 		}
+
+		void AnimateSpriteRenderer(SpriteRenderer sr)
+		{
+            sr.DOKill();
+            sr.color = blinkColor;
+            sr.DOColor(initialColor, blinkDuration * .5f).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                sr.DOColor(blinkColor, blinkDuration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
+            });
+        }
 
 		public override void Activation()
 		{
@@ -166,19 +191,44 @@ namespace BasketBounce.Gameplay.Mechanics
 			Deactivate();
 			if (currentHits >= hitsToFall)
 			{
-				//Break();
-				sr.DOKill();
-				sr.color = initialColor;
-				_textObj?.gameObject.SetActive(false);
+                //Break();
+                if (srs.Length > 1)
+                {
+                    foreach (var item in srs)
+                    {
+                        ResetSr(item);
+                    }
+                }
+                else
+                {
+                    ResetSr(sr);
+                }
+                _textObj?.gameObject.SetActive(false);
 				this.Co_DelayedExecute(Break, fallDelay);
 				broken = true;
 				OnFall?.Invoke();
 			}
 		}
 
+		void ResetSr(SpriteRenderer sr)
+		{
+            sr.DOKill();
+            sr.color = initialColor;
+        }
+
 		private void Break()
 		{
-			sr.DOColor(new Color(initialColor.r, initialColor.g, initialColor.b, 0), 0.5f).SetEase(Ease.InSine);
+            if (srs.Length > 1)
+            {
+                foreach (var item in srs)
+                {
+                    item.DOColor(new Color(initialColor.r, initialColor.g, initialColor.b, 0), 0.5f).SetEase(Ease.InSine);
+                }
+            }
+            else
+            {
+                sr.DOColor(new Color(initialColor.r, initialColor.g, initialColor.b, 0), 0.5f).SetEase(Ease.InSine);
+            }
 			gfx_shadow.gameObject.SetActive(false);
 			rb.isKinematic = false;
 			rb.gravityScale = gravityScale;

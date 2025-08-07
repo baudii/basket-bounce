@@ -7,6 +7,7 @@ using UnityEngine.AddressableAssets;
 using KK.Common;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BasketBounce.Gameplay.Levels
 {
@@ -43,10 +44,65 @@ namespace BasketBounce.Gameplay.Levels
 			this.gameManager = gameManager;
 			var op = Addressables.LoadAssetsAsync<GameObject>("LevelSets", null);
 			await op.Task;
-			levelSetPrefabs = op.Result;
+			levelSetPrefabs = op.Result.OrderBy(p => p.name).ToList();
+#if UNITY_EDITOR
+			if (transform.childCount == 0)
+			{
+				// Not testing levels
+				return;
+			}
+
+            LevelSet lastActiveLevelSet = null;
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.activeSelf && child.TryGetComponent(out LevelSet levelSet))
+                {
+                    levelSet.gameObject.SetActive(false);
+                    lastActiveLevelSet = levelSet;
+                }
+            }
+            currentLevelSet = lastActiveLevelSet;
+            currentLevelSet.gameObject.SetActive(true);
+
+            this.Log($"Found current level set: {currentLevelSet}");
+
+            LevelChunk lastActiveChunk = null;
+
+            foreach (Transform child in lastActiveLevelSet.transform)
+            {
+                if (child.gameObject.activeSelf && child.TryGetComponent(out LevelChunk chunk))
+                {
+                    chunk.gameObject.SetActive(false);
+                    lastActiveChunk = chunk;
+                }
+            }
+            lastActiveChunk.gameObject.SetActive(true);
+            this.Log($"Found current chunk: {lastActiveChunk}");
+
+            int levelNum = 0;
+            int i = 0;
+
+            LevelData lastLevel = null;
+            foreach (Transform child in lastActiveChunk.transform)
+            {
+                if (child.gameObject.activeSelf && child.TryGetComponent(out LevelData levelData))
+                {
+                    if (lastLevel != null)
+                        lastLevel.gameObject.SetActive(false);
+
+                    lastLevel = levelData;
+                    levelNum = i;
+                }
+                i++;
+            }
+            this.Log($"Found current level: {levelNum}");
+            currentLevelSet.InitChunk(levelNum, lastActiveChunk);
+            OnLevelSetAvailable?.Invoke(currentLevelSet);
+            await LoadLevelAsync(levelNum);
+#endif
         }
 
-		void OnDestroy()
+        void OnDestroy()
 		{
 			OnLevelSetupEvent.RemoveAllListeners();
 		}
@@ -65,6 +121,7 @@ namespace BasketBounce.Gameplay.Levels
 			var levelSetPrefab = levelSetPrefabs[levelSet];
 			var levelSetGo = Instantiate(levelSetPrefab, Vector3.zero, Quaternion.identity, transform);
 			currentLevelSet = levelSetGo.GetComponent<LevelSet>();
+			currentLevelSet.Init();
 			OnLevelSetAvailable?.Invoke(currentLevelSet);
 
 			if (level == null)

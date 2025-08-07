@@ -52,9 +52,15 @@ namespace BasketBounce.UI
 		private void SetActive(LevelData levelData)
 		{
 			if (dolly.PathLength <= 3f)
+			{
+				this.Log($"Dolly path {dolly.PathLength} is too short (<=3f), disabling...");
 				gameObject.SetActive(false);
+			}
 			else
-				Enable();
+			{
+                this.Log($"Enabling...");
+                Enable();
+			}
 		}
 
 		private void Enable()
