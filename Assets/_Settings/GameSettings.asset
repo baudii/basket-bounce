@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c79c9f752a904f498655ebd4f100204, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  autostartEnabled: 1
+  autostartEnabled: 0
   audioMixerSettings: {fileID: 11400000, guid: 50ebe35fe5bac95449d6b5e532978141, type: 2}

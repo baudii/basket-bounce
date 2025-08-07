@@ -19,7 +19,9 @@ namespace BasketBounce.Gameplay
 
 		public override Task Setup()
 		{
-			Cts.Token.ThrowIfCancellationRequested();
+			OnSetup();
+
+            Cts.Token.ThrowIfCancellationRequested();
 
 			DIContainer.Register(ball);
 			DIContainer.Register(dolly);
@@ -30,6 +32,8 @@ namespace BasketBounce.Gameplay
 
 		public override Task Activate()
 		{
+			OnActivate();
+
 			Cts.Token.ThrowIfCancellationRequested();
 
 			DIContainer.GetDependency(out GameManager gameManager);

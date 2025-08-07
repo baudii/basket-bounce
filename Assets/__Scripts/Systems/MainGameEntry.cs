@@ -45,6 +45,7 @@ namespace BasketBounce.Systems
 
 		public override async Task Setup()
 		{
+			OnSetup();
 			var scene = SceneManager.GetSceneByName(SceneNames.MAIN_GAME_ENTRY);
 			SceneManager.SetActiveScene(scene);
 
@@ -66,6 +67,7 @@ namespace BasketBounce.Systems
 
 		public override async Task Activate()
 		{
+			OnActivate();
 			// Порядок важен
 			await gameplayEntryPoint.Activate();
 			await uiEntryPoint.Activate();

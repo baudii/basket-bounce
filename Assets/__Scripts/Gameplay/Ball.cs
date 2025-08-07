@@ -141,7 +141,7 @@ namespace BasketBounce.Gameplay
 			if (IsBallStuck() && !canNotStuck)
 			{
 				currentStuckTime += Time.deltaTime;
-				if (currentStuckTime > maxStuckTimeCurrent && rb.velocity.y < 1)
+				if (currentStuckTime > (maxStuckTimeCurrent * Mathf.Log(4) / speed) && rb.velocity.y < 1)
 				{
 					// SHOW STACK SCREEN
 					OnStuck?.Invoke();

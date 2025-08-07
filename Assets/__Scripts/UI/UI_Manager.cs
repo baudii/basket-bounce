@@ -136,6 +136,7 @@ namespace BasketBounce.UI
 			{
 				levelManager.OnLevelSetupEvent.RemoveListener(OnLevelSetup);
 				levelManager.OnLevelIsLoadedEvent.RemoveListener(OnLevelIsLoaded);
+				levelManager.OnLevelSetAvailable.RemoveListener(OnLevelSetAvailable);
 				levelManager.OnFinishedGameEvent.RemoveListener(OnFinishedGame);
 				levelManager.OnFinishedLevelEvent.RemoveListener(ShowLevelCompleteScreen);
 			}

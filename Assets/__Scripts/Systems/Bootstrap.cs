@@ -12,6 +12,7 @@ namespace BasketBounce.Systems
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static async void AutostartGame()
 		{
+			Debug.Log($"[Bootstrap] Starting initial setup");
 			GameManager gameManager = new GameManager();
 			gameManager.Init();
 
@@ -28,8 +29,9 @@ namespace BasketBounce.Systems
 			gameSettings.Init();
 
 			if (gameSettings.AutoStartEnabled)
-			{
-				await SceneManager.LoadSceneAsync(SceneNames.BOOT).AsTask();
+            {
+                Debug.Log($"[Bootstrap] Initiating auto start");
+                await SceneManager.LoadSceneAsync(SceneNames.BOOT).AsTask();
 				var menuEntry = new GameObject().AddComponent<MainMenuEntry>();
 				await menuEntry.Enter();
 			}

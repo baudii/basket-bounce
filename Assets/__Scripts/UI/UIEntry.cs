@@ -10,6 +10,7 @@ public class UIEntry : SceneEntryPoint
 
 	public override Task Setup()
 	{
+		OnSetup();
 		this.Log($"Initializing ui UIEntry.");
 		Cts.Token.ThrowIfCancellationRequested();
 
@@ -21,6 +22,7 @@ public class UIEntry : SceneEntryPoint
 	}
 	public override Task Activate()
 	{
+		OnActivate();
 		Cts.Token.ThrowIfCancellationRequested();
 
 		return Task.CompletedTask;

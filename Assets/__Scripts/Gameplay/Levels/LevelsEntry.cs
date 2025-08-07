@@ -13,6 +13,7 @@ namespace BasketBounce.Gameplay.Levels
 
 		public override Task Setup()
 		{
+			OnSetup();
 			Cts.Token.ThrowIfCancellationRequested();
 
 			DIContainer.GetDependency(out gameManager);
@@ -24,6 +25,7 @@ namespace BasketBounce.Gameplay.Levels
 
 		public async override Task Activate()
 		{
+			OnActivate();
 			Cts.Token.ThrowIfCancellationRequested();
 			await levelManager.Init(gameManager);
 

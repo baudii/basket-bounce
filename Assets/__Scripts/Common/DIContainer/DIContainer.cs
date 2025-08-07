@@ -22,8 +22,9 @@ namespace KK.Common
 			lock (dependencies)
 			{
 				(Type, string) key = (typeof(T), tag);
+                obj.Log($"Registering dependency (key: {key})");
 
-				if (dependencies.ContainsKey(key))
+                if (dependencies.ContainsKey(key))
 					throw new ArgumentException($"Key with tag {tag} and Type {typeof(T)} already exists in dictionary");
 
 				if (obj.TryGetGameObject(out var go))
@@ -52,12 +53,13 @@ namespace KK.Common
 		}
 
 		public static void UnregisterDependency<T>(T obj, string tag)
-		{
-			lock (dependencies)
+        {
+            lock (dependencies)
 			{
 				(Type, string) key = (typeof(T), tag);
+                obj.Log($"Unregistering dependency (key: {key})");
 
-				if (!dependencies.TryGetValue(key, out object value))
+                if (!dependencies.TryGetValue(key, out object value))
 					throw new ArgumentException($"No dependency found with tag '{tag}' and type '{typeof(T).Name}'.");
 
 				if (!Equals(value, obj))

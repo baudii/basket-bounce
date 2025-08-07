@@ -34,16 +34,14 @@ namespace BasketBounce.Systems
 
 		public override async Task Setup()
 		{
+			OnSetup();
 			DIContainer.GetDependency(out gameManager);
-
 			await gameManager.StartLoading(Cts.Token);
-			var scene = SceneManager.GetSceneByName(SceneNames.MAIN_MENU);
-			if (scene.buildIndex == -1)
-			{
-				await SceneManager.LoadSceneAsync(SceneNames.MAIN_MENU, LoadSceneMode.Additive).AsTask();
-				scene = SceneManager.GetSceneByName(SceneNames.MAIN_MENU);
-			}
-			var root = scene.GetRootGameObjects();
+
+            await SceneManager.LoadSceneAsync(SceneNames.MAIN_MENU, LoadSceneMode.Additive).AsTask();
+            var scene = SceneManager.GetSceneByName(SceneNames.MAIN_MENU);
+            var root = scene.GetRootGameObjects();
+
 			foreach (var item in root)
 			{
 				if (item.TryGetComponent(out IInitializable initializable))
@@ -65,6 +63,7 @@ namespace BasketBounce.Systems
 
 		public override async Task Activate()
 		{
+			OnActivate();
 			gameManager.OnSubmitLevel -= SubmitLevelSet;
 			await gameManager.StartLoading(Cts.Token);
 
